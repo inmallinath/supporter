@@ -89,21 +89,20 @@ end
 ```
 Step 13: Add the routes for `new`, `create`,
 
-# CREATE and NEW
+CREATE and NEW
+
 get '/agents/new' => 'agents#new', as: :new_agent
 post '/agents' => 'agents#create', as: :agents
 
-# LIST and SHOW
+LIST and SHOW
 get '/agents/:id' => 'agents#show', as: :agent
 get '/agents' => 'agents#index'
-#
 
-# get "/agents/search" => "agents#search", as: :search_agents
-# EDIT AND UPDATE
+EDIT AND UPDATE
 get '/agents/:id/edit' => 'agents#edit', as: :edit_agent
 patch '/agents/:id' => 'agents#update'
-#
-# DELETE
+
+DELETE
 delete '/agents/:id' => 'agents#destroy'
 
 After having defined the routes, the views and controllers were coded to meet the requirements.
@@ -116,5 +115,5 @@ BONUS 1:
 SELECT department, COUNT(*) AS support_request_count
 FROM agents
 GROUP BY department
-ORDER BY department 
+ORDER BY department
 ```
