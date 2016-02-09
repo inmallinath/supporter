@@ -1,0 +1,34 @@
+<h1>New Request</h1>
+
+<%= @agent.errors.full_messages.join(", ")%>
+
+<%= form_for @agent do |a|%>
+<div>
+  <%= a.label :name %>
+  <%= a.text_field :name, :class => "textfield"%>
+</div>
+<div>
+  <%= a.label :email %>
+  <%= a.text_field :email, :class => "textfield" %>
+</div>
+<div>
+  <%= a.label :department %>
+
+  <%= a.radio_button :department, 'Sales'%>
+  <%= a.label :Sales %>
+
+  <%= a.radio_button :department, 'Marketing', :checked => true %>
+  <%= a.label :Marketing %>
+
+  <%= a.radio_button :department, 'Technical'%>
+  <%= a.label :Technical %>
+</div>
+<div>
+  <%= a.label :message %>
+  <%= a.text_area :message, :class => "textarea" %>
+</div>
+
+<div>
+  <%= a.submit :Save, :class => "button"%>
+</div>
+<%end%>

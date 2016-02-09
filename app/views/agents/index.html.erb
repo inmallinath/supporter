@@ -1,0 +1,42 @@
+<h1> Support Requests</h1>
+
+<table border="1" style="margin: 0 auto;">
+  <tr>
+    <th>
+      Name
+    </th>
+    <th>
+      Email
+    </th>
+    <th>
+      Department
+    </th>
+    <th>
+      message
+    </th>
+    <th>
+      Actions
+    </th>
+  </tr>
+<% @agents.each do |agent| %>
+<tr>
+  <td><%= agent.name %></td>
+  <td><%= agent.email %></td>
+  <td><%= agent.department %></td>
+  <td><%= agent.message.first(50) + "..." %></td>
+  <td><%= link_to "Edit", edit_agent_path(agent)%>
+    <%= link_to "Delete", agent_path(agent), method: :delete, data: {confirm: "Are you sure?" }%>
+  <%check_request = agent.request%>
+    <% if check_request = "false"%>
+      <%= link_to "Not Done", edit_agent_path(agent)%>
+    <%else%>
+      <%= link_to "Done", edit_agent_path(agent)%>
+    <%end%>
+  </td>
+</tr>
+<%end%>
+</table>
+
+<div id="paginate" style="margin: 0 auto; display: block; text-align: center;">
+<%= paginate @agents%>
+</div>
