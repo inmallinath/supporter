@@ -9,13 +9,13 @@ class AgentsController < ApplicationController
     @agents = @results.page(params[:page]).per(7)
   end
 
-  def search
-    if params[:search]
-      @agents = Agent.search(params[:search]).order("created_at DESC")
-    else
-      @agents = Agent.order("created_at DESC")
-    end
-  end
+  # def search
+  #   if params[:search]
+  #     @agents = Agent.search(params[:search]).order("created_at DESC")
+  #   else
+  #     @agents = Agent.order("created_at DESC")
+  #   end
+  # end
 
   def new
     @agent = Agent.new
@@ -46,6 +46,10 @@ class AgentsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def state
+    render nothing: true
   end
 
   def destroy

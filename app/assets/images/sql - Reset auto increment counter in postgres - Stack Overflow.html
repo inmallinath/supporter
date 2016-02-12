@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+<!-- saved from url=(0083)http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres -->
+<html itemscope="" itemtype="http://schema.org/QAPage" class="gr__stackoverflow_com"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>sql - Reset auto increment counter in postgres - Stack Overflow</title>
+    <link rel="shortcut icon" href="http://cdn.sstatic.net/stackoverflow/img/favicon.ico?v=4f32ecc8f43d">
+    <link rel="apple-touch-icon image_src" href="http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a">
+    <link rel="search" type="application/opensearchdescription+xml" title="Stack Overflow" href="http://stackoverflow.com/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:domain" content="stackoverflow.com">
+    <meta property="og:type" content="website">    
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon@2.png?v=73d79a89bded&amp;a">
+    <meta name="twitter:title" property="og:title" itemprop="title name" content="Reset auto increment counter in postgres">
+    <meta name="twitter:description" property="og:description" itemprop="description" content="I would like to force the auto increment field of a table to some value, I tried with this:
+
+ALTER TABLE product AUTO_INCREMENT = 1453
+
+
+AND 
+
+ALTER SEQUENCE product  RESTART WITH 1453;
+ERROR:  rel...">
+    <meta property="og:url" content="http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres">
+    <link rel="canonical" href="http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres">
+
+    
+    
+    <script type="text/javascript" async="" src="./sql - Reset auto increment counter in postgres - Stack Overflow_files/"></script><script async="" src="./sql - Reset auto increment counter in postgres - Stack Overflow_files/quant.js"></script><script async="" src="./sql - Reset auto increment counter in postgres - Stack Overflow_files/beacon.js"></script><script async="" src="./sql - Reset auto increment counter in postgres - Stack Overflow_files/analytics.js"></script><script type="text/javascript" async="" src="./sql - Reset auto increment counter in postgres - Stack Overflow_files/ados.js"></script><script src="./sql - Reset auto increment counter in postgres - Stack Overflow_files/jquery.min.js"></script>
+    <script src="./sql - Reset auto increment counter in postgres - Stack Overflow_files/stub.en.js"></script>
+    <link rel="stylesheet" type="text/css" href="./sql - Reset auto increment counter in postgres - Stack Overflow_files/all.css">
+
+            <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Reset auto increment counter in postgres&#39;" href="http://stackoverflow.com/feeds/question/5342440">
+            <meta name="twitter:app:country" content="US">
+            <meta name="twitter:app:name:iphone" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:iphone" content="871299723">
+            <meta name="twitter:app:url:iphone" content="se-zaphod://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres">
+            <meta name="twitter:app:name:ipad" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:ipad" content="871299723">
+            <meta name="twitter:app:url:ipad" content="se-zaphod://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres">
+            <meta name="twitter:app:name:googleplay" content="Stack Exchange Android">
+            <meta name="twitter:app:url:googleplay" content="http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres">
+            <meta name="twitter:app:id:googleplay" content="com.stackexchange.marvin">
+        <script>
+        
+            StackExchange.ready(function () {
+                    
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.initSnippetRenderer();
+                    });
+                    
+
+                StackExchange.using("postValidation", function () {
+                    StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+                });
+
+                
+                StackExchange.question.init({showAnswerHelp:true,totalCommentCount:1,shownCommentCount:1,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:5342440});
+
+                styleCode();
+
+                    StackExchange.realtime.subscribeToQuestion('1', '5342440');
+                                                                    StackExchange.using("gps", function () { StackExchange.gps.trackOutboundClicks('#content', '.post-text'); });
+
+            });
+        </script>
+
+
+    <script>
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1455200496,"networkMetaHostname":"meta.stackexchange.com","routeName":"Questions/Show","styleCode":true,"enableUserHovercards":true,"snippets":{"enabled":true,"domain":"stacksnippets.net"},"site":{"name":"Stack Overflow","description":"Q&A for professional and enthusiast programmers","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdchgIAAAAAAJwGpIzRQSOFaO0pU6s44Xt8aTwc","recaptchaAudioLang":"en","enableNewTagCreationWarning":true,"insertSpaceAfterNameTabCompletion":false,"id":1,"enableSocialMediaInSharePopup":true},"user":{"fkey":"3121ae8fc7401d1ce02898f1653a9801","rep":0,"isAnonymous":true,"isAnonymousNetworkWide":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"5c525e2ded10","js/moderator.en.js":"4ae7c877ec03","js/full-anon.en.js":"db17aff4598b","js/full.en.js":"a53f1c27ea68","js/wmd.en.js":"7cad91744821","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"1e864348aad6","js/help.en.js":"dbd4f489eff2","js/tageditor.en.js":"9a6504012242","js/tageditornew.en.js":"a40d2c468d68","js/inline-tag-editing.en.js":"314cfb72355b","js/revisions.en.js":"c2bb6b44f707","js/review.en.js":"67417e5284e2","js/tagsuggestions.en.js":"7dfec0d2a2d7","js/post-validation.en.js":"356a8f0205cc","js/explore-qlist.en.js":"e71f14781288","js/events.en.js":"563da994a182","js/keyboard-shortcuts.en.js":"6872d137140a","js/external-editor.en.js":"cf58cc6630ef","js/external-editor.en.js":"cf58cc6630ef","js/snippet-javascript.en.js":"f590e314ee2d","js/snippet-javascript-codemirror.en.js":"a599376ba367"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+    </script>
+    
+        <script>
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+    
+    
+<script async="" src="./sql - Reset auto increment counter in postgres - Stack Overflow_files/full-anon.en.js"></script><script async="" src="./sql - Reset auto increment counter in postgres - Stack Overflow_files/snippet-javascript.en.js"></script><script async="" src="./sql - Reset auto increment counter in postgres - Stack Overflow_files/post-validation.en.js"></script><script async="" src="./sql - Reset auto increment counter in postgres - Stack Overflow_files/prettify-full.en.js"></script><script async="" src="./sql - Reset auto increment counter in postgres - Stack Overflow_files/external-editor.en.js"></script><script type="text/javascript" src="./sql - Reset auto increment counter in postgres - Stack Overflow_files/"></script><link rel="stylesheet" href="./sql - Reset auto increment counter in postgres - Stack Overflow_files/"><link type="text/css" rel="stylesheet" href="./sql - Reset auto increment counter in postgres - Stack Overflow_files/jobs.min.css"></head>
+<body class="question-page new-topbar" data-gr-c-s-loaded="true">
+    <noscript>&lt;div id="noscript-padding"&gt;&lt;/div&gt;</noscript>
+    
+
+
+
+
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+
+
+
+
+
+<div class="topbar">
+    <div class="topbar-wrapper">
+
+        <div class="js-topbar-dialog-corral">
+
+
+<div class="topbar-dialog siteSwitcher-dialog dno">
+    <div class="header">
+        <h3><a href="http://stackoverflow.com/">current community</a></h3>
+    </div>
+    <div class="modal-content current-site-container">
+        <ul class="current-site">
+                <li>
+                        <div class="related-links">
+                    <a href="http://chat.stackoverflow.com/" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:6 })">chat</a>
+            </div>
+
+
+
+
+    <a href="http://stackoverflow.com/" class="current-site-link site-link js-gps-track" data-id="1" data-gps-track="
+        site_switcher.click({ item_type:3 })">
+        <div class="site-icon favicon favicon-stackoverflow" title="Stack Overflow"></div>
+        Stack Overflow
+    </a>
+
+                </li>
+                <li class="related-site">
+                        <div class="L-shaped-icon-container">
+        <span class="L-shaped-icon"></span>
+    </div>
+
+                    
+
+
+
+    <a href="http://meta.stackoverflow.com/" class="site-link js-gps-track" data-id="552" data-gps-track="
+            site.switch({ target_site:552, item_type:3 }),
+        site_switcher.click({ item_type:4 })">
+        <div class="site-icon favicon favicon-stackoverflowmeta" title="Meta Stack Overflow"></div>
+        Meta Stack Overflow
+    </a>
+
+                </li>
+                            <li class="related-site">
+                        <div class="L-shaped-icon-container">
+        <span class="L-shaped-icon"></span>
+    </div>
+
+                    <a class="site-link js-gps-track" href="http://careers.stackoverflow.com/?utm_source=stackoverflow.com&amp;utm_medium=site-ui&amp;utm_campaign=multicollider" data-gps-track="site_switcher.click({ item_type:9 })">
+                        <div class="site-icon favicon favicon-careers" title="Stack Overflow Careers"></div>
+                        Stack Overflow Careers
+                    </a>
+                </li>
+        </ul>
+    </div>
+    
+    <div class="header" id="your-communities-header">
+        <h3>
+your communities        </h3>
+            
+    </div>
+    <div class="modal-content" id="your-communities-section">
+            
+            <div class="call-to-login">
+<a href="https://stackoverflow.com/users/signup?ssrc=site_switcher&amp;returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f5342440%2freset-auto-increment-counter-in-postgres" class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:10 })">Sign up</a> or <a href="https://stackoverflow.com/users/login?ssrc=site_switcher&amp;returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f5342440%2freset-auto-increment-counter-in-postgres" class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:11 })">log in</a> to customize your list.
+            </div>
+    </div>
+    
+    <div class="header">
+        <h3><a href="http://stackexchange.com/sites">more stack exchange communities</a></h3>
+        <a href="http://blog.stackoverflow.com/" class="fr">company blog</a>
+    </div>
+    <div class="modal-content">
+            <div class="child-content"></div>
+    </div>
+</div>
+        </div>
+
+        <div class="network-items">
+
+            <a href="http://stackexchange.com/" class="topbar-icon icon-site-switcher yes-hover js-site-switcher-button js-gps-track" data-gps-track="site_switcher.show" title="A list of all 153 Stack Exchange sites">
+                <span class="hidden-text">Stack Exchange</span>
+            </a>
+
+    <a href="http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres#" class="topbar-icon icon-inbox yes-hover js-inbox-button" title="Recent inbox messages">
+        <span class="hidden-text">Inbox</span>
+        <span class="unread-count" style="display:none"></span>
+    </a>
+    <a href="http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres#" class="topbar-icon icon-achievements yes-hover js-achievements-button" data-unread-class="" title="Recent achievements: reputation, badges, and privileges earned">
+        <span class="hidden-text">Reputation and Badges</span>
+        <span class="unread-count" style="display:none">
+            
+        </span>
+    </a>
+        </div>
+
+        <div class="topbar-links">
+
+                <div class="links-container">
+                <span class="topbar-menu-links">
+                                    <a href="https://stackoverflow.com/users/signup?ssrc=head&amp;returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f5342440%2freset-auto-increment-counter-in-postgres" class="login-link">sign up</a>
+                                <a href="https://stackoverflow.com/users/login?ssrc=head&amp;returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f5342440%2freset-auto-increment-counter-in-postgres" class="login-link">log in</a>
+
+                        <a href="http://stackoverflow.com/tour">tour</a>
+                            <a href="http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres#" class="icon-help js-help-button" title="Help Center and other resources">
+        help
+        <span class="triangle"></span>
+    </a>
+    <div class="topbar-dialog help-dialog js-help-dialog dno">
+        <div class="modal-content">
+            <ul>
+                                    <li>
+                        <a href="http://stackoverflow.com/tour" class="js-gps-track" data-gps-track="help_popup.click({ item_type:1 })">
+                            Tour
+                            <span class="item-summary">
+                                Start here for a quick overview of the site
+                            </span>
+                        </a>
+                    </li>
+                <li>
+                    <a href="http://stackoverflow.com/help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:4 })">
+                        Help Center
+                        <span class="item-summary">
+                            Detailed answers to any questions you might have
+                        </span>
+                    </a>
+                </li>
+                    <li>
+                        <a href="http://meta.stackoverflow.com/" class="js-gps-track" data-gps-track="help_popup.click({ item_type:2 })">
+                            Meta
+                            <span class="item-summary">
+                                Discuss the workings and policies of this site
+                            </span>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+
+                    </span>
+                </div>
+
+            <div class="search-container">
+                <form id="search" action="http://stackoverflow.com/search" method="get" autocomplete="off">
+                    <input name="q" type="text" placeholder="Search Q&amp;A" value="" tabindex="1" autocomplete="off" maxlength="240">
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+    <script>
+        StackExchange.ready(function() { StackExchange.topbar.init(); });
+    </script>
+
+    <div class="container">
+        <div id="header">
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="http://stackoverflow.com/">
+                    Stack Overflow
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs">
+                    <ul>
+                        <li class="youarehere"><a id="nav-questions" href="http://stackoverflow.com/questions">Questions</a></li>
+                            <li><a id="nav-jobs" href="http://stackoverflow.com/jobs">Jobs</a></li>
+                        <li><a id="nav-tags" href="http://stackoverflow.com/tags">Tags</a></li>
+                        <li><a id="nav-users" href="http://stackoverflow.com/users">Users</a></li>
+                        <li><a id="nav-badges" href="http://stackoverflow.com/help/badges">Badges</a></li>
+                                            </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion" href="http://stackoverflow.com/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content" class="snippet-hidden">
+            
+
+<div itemscope="" itemtype="http://schema.org/Question">
+    <link itemprop="image" href="http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a">
+
+<div id="herobox">
+    <div id="hero-content">
+            <div id="close"><a title="click to minimize">_</a></div>
+        <div id="blurb">
+            Stack Overflow is a community of 4.7 million programmers, just like you, helping each other.
+            <br>
+                <br>Join them; it only takes a minute:<br>
+            <br>
+            <a href="http://stackoverflow.com/users/signup?ssrc=hero&amp;returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f5342440%2freset-auto-increment-counter-in-postgres" id="tell-me-more" class="button">Sign up</a>
+        </div>
+        <div id="desc">
+            <b>Join the Stack Overflow community to:</b>
+            <ol id="hiw">
+                <li id="q">Ask programming questions
+                </li>
+                <li id="an">Answer and help your peers
+                </li>
+                <li id="b">Get recognized for your expertise
+                </li>
+            </ol>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+    <script>
+        StackExchange.ready(function () {
+
+            var location = 0;
+            if ($("body").hasClass("questions-page")) {
+                location = 1;;
+            } else if ($("body").hasClass("question-page")) {
+                location = 1;;
+            } else if ($("body").hasClass("faq-page")) {
+                location = 5;;
+            } else if ($("body").hasClass("home-page")) {
+                location = 3;;
+            }
+
+            $('#tell-me-more').click(function () {
+                StackExchange.using("gps", function () {
+                    StackExchange.gps.track("hero.action", { hero_action_type: 'cta', location: location }, true);
+                });
+            });
+            $('#herobox #close').click(function () {
+                StackExchange.using("gps", function () {
+                    StackExchange.gps.track("hero.action", { hero_action_type: "minimize", location: location }, true);
+                });
+                $.cookie("hero", "mini", { path: "/", expires: 365 });
+                $.ajax({
+                    url: "/hero-mini",
+                    success: function (data) {
+                        $("#herobox").fadeOut("fast", function () {
+                            $("#herobox").replaceWith(data);
+                            $("#herobox-mini").fadeIn("fast");
+                        });
+                    }
+                });
+                return false;
+            });
+        });
+
+    </script>
+</div>
+			<div id="question-header">
+                <h1 itemprop="name"><a href="http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres" class="question-hyperlink">Reset auto increment counter in postgres</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="5342440" id="question">
+
+    <script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22,8277,"adzerk2120673763",4).setZone(43); });
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk2120673763"><a href="http://engine.adzerk.net/r?e=eyJhdiI6NDE0LCJhdCI6NCwiYnQiOjAsImNtIjozMjI1MTQsImNoIjoxMTc4LCJjayI6e30sImNyIjoxMjY3NTk1LCJkaSI6IjA2ZDhlYzI2NTkxYTQ5ODY4NjkzZDk5ZDAxZWZkMTlhIiwiZG0iOjEsImZjIjoxMzY1OTU4LCJmbCI6ODY0MjI1LCJpcCI6Ijk2LjQ5LjE3OC4xMzciLCJrdyI6InNxbCxwb3N0Z3Jlc3FsLHJlc2V0LGF1dG8taW5jcmVtZW50IiwibnciOjIyLCJwYyI6MCwiZWMiOjAsInByIjoxNjA0LCJydCI6MSwicmYiOiJodHRwczovL3d3dy5nb29nbGUuY2EvIiwic3QiOjgyNzcsInVrIjoidWUxLTM0ZTRiMjNiMmM0ODRhOTI4ZTBkZTZmMjBiYzBiNmE0Iiwiem4iOjQzLCJ0cyI6MTQ1NTIwMDQ5ODAxMCwiYmYiOnRydWUsInBuIjoiYWR6ZXJrMjEyMDY3Mzc2MyIsInVyIjoiaHR0cDovL3N0YWNrb3ZlcmZsb3cuY29tL2pvYnMvcmVtb3RlP3V0bV9zb3VyY2U9c3RhY2tvdmVyZmxvdy5jb20mdXRtX21lZGl1bT1hZCZ1dG1fY2FtcGFpZ249Y2FuZGlkYXRlcy13ZmgmdXRtX2NvbnRlbnQ9bGItd2ZoLWtleWJvYXJkIn0&amp;s=7LYfIb9mC3TfpgnzjYI_68Jx7DU" rel="nofollow" target="_blank" title=""><img src="./sql - Reset auto increment counter in postgres - Stack Overflow_files/" title="" alt="" border="0" width="728" height="90" style="display: none !important;"></a><img height="0px" width="0px" border="0" style="position: absolute; display: none !important;" src="./sql - Reset auto increment counter in postgres - Stack Overflow_files/"></div>    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="5342440">
+        <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">60</span>
+        <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+
+        <a class="star-off" href="http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres#" title="This is a favorite question (click again to undo)">favorite</a>
+        <div class="favoritecount"><b>24</b></div>
+
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="text">
+
+<p>I would like to force the auto increment field of a table to some value, I tried with this:</p>
+
+<pre class="lang-sql prettyprint prettyprinted"><code><span class="kwd">ALTER</span><span class="pln"> </span><span class="kwd">TABLE</span><span class="pln"> product AUTO_INCREMENT </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1453</span></code></pre>
+
+<p>AND </p>
+
+<pre class="lang-sql prettyprint prettyprinted"><code><span class="kwd">ALTER</span><span class="pln"> SEQUENCE product  RESTART </span><span class="kwd">WITH</span><span class="pln"> </span><span class="lit">1453</span><span class="pun">;</span><span class="pln">
+ERROR</span><span class="pun">:</span><span class="pln">  relation </span><span class="str">"your_sequence_name"</span><span class="pln"> does </span><span class="kwd">not</span><span class="pln"> exist</span></code></pre>
+
+<p>I'm new to postgres :( </p>
+
+<p>I have a table <code>product</code> with <code>Id</code> and <code>name</code> field</p>
+    </div>
+    <div class="post-taglist">
+        <a href="http://stackoverflow.com/questions/tagged/sql" class="post-tag js-gps-track" title="show questions tagged &#39;sql&#39;" rel="tag">sql</a> <a href="http://stackoverflow.com/questions/tagged/postgresql" class="post-tag js-gps-track" title="show questions tagged &#39;postgresql&#39;" rel="tag">postgresql</a> <a href="http://stackoverflow.com/questions/tagged/reset" class="post-tag js-gps-track" title="show questions tagged &#39;reset&#39;" rel="tag">reset</a> <a href="http://stackoverflow.com/questions/tagged/auto-increment" class="post-tag js-gps-track" title="show questions tagged &#39;auto-increment&#39;" rel="tag">auto-increment</a> 
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/q/5342440" title="short permalink to this question" class="short-link" id="link-post-5342440">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/5342440/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/5342440/revisions" title="show all edits to this post">edited <span title="2011-03-17 19:15:11Z" class="relativetime">Mar 17 '11 at 19:15</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/373025/alexandre-c"><div class="gravatar-wrapper-32"><img src="./sql - Reset auto increment counter in postgres - Stack Overflow_files/1916b08af2d329d0fe74b7fb9412369b" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/373025/alexandre-c">Alexandre C.</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score 36115" dir="ltr">36.1k</span><span title="4 gold badges"><span class="badge1"></span><span class="badgecount">4</span></span><span title="75 silver badges"><span class="badge2"></span><span class="badgecount">75</span></span><span title="155 bronze badges"><span class="badge3"></span><span class="badgecount">155</span></span>
+        </div>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        <div class="user-info ">
+    <div class="user-action-time">
+        asked <span title="2011-03-17 16:55:03Z" class="relativetime">Mar 17 '11 at 16:55</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/287964/rad"><div class="gravatar-wrapper-32"><img src="./sql - Reset auto increment counter in postgres - Stack Overflow_files/7e2e9e37e86bf3dd3171e0424183231d" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/287964/rad">Rad</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">512</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="8 silver badges"><span class="badge2"></span><span class="badgecount">8</span></span><span title="19 bronze badges"><span class="badge3"></span><span class="badgecount">19</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</div>
+</td>
+        </tr>
+                
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-5342440" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-6032265" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">4</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">If new why not use pgAdmin and inspect the commands it will generate?</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/207036/unreason" title="9485 reputation" class="comment-user">Unreason</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres#comment6032265_5342440"><span title="2011-03-17 17:06:01Z" class="relativetime-clean">Mar 17 '11 at 17:06</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-5342440" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres#" onclick=""></a>
+        </div>         
+    </td>
+</tr>        </tbody></table>
+</div>
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								5 Answers
+                                <span style="display:none;" itemprop="answerCount">5</span>
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres?answertab=active#tab-top" data-nav-xhref="" title="Answers with the latest activity first" data-value="active">
+            active</a>
+        <a href="http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres?answertab=oldest#tab-top" data-nav-xhref="" title="Answers in the order they were provided" data-value="oldest">
+            oldest</a>
+        <a class="youarehere" href="http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres?answertab=votes#tab-top" data-nav-xhref="" title="Answers with the highest score first" data-value="votes">
+            votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="5342503"></a>
+<div id="answer-5342503" class="answer accepted-answer" data-answerid="5342503" itemscope="" itemtype="http://schema.org/Answer" itemprop="acceptedAnswer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="5342503">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">32</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>If you created the table <code>product</code> with an <code>id</code> column, then the sequence is not simply called <code>product</code>, but rather <code>product_id_seq</code> (that is, <code>${table}_${column}_seq</code>). You can see the sequences in your database using the <code>\ds</code> command in psql. If you do <code>\d product</code> and look at the default constraint for your column, the <code>nextval(...)</code> call will specify the sequence name too.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/5342503" title="short permalink to this answer" class="short-link" id="link-post-5342503">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/5342503/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/5342503/revisions" title="show all edits to this post">edited <span title="2011-10-19 23:16:22Z" class="relativetime">Oct 19 '11 at 23:16</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/623581/anjan"><div class="gravatar-wrapper-32"><img src="./sql - Reset auto increment counter in postgres - Stack Overflow_files/ca6208c0ab0061ded967ce0d4afa5e71" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/623581/anjan">Anjan</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">640</span><span title="8 silver badges"><span class="badge2"></span><span class="badgecount">8</span></span><span title="16 bronze badges"><span class="badge3"></span><span class="badgecount">16</span></span>
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2011-03-17 17:00:01Z" class="relativetime">Mar 17 '11 at 17:00</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/85134/araqnid"><div class="gravatar-wrapper-32"><img src="./sql - Reset auto increment counter in postgres - Stack Overflow_files/f5fc941f261b49af2fa459bfe767cb37" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/85134/araqnid">araqnid</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score 48571" dir="ltr">48.6k</span><span title="13 gold badges"><span class="badge1"></span><span class="badgecount">13</span></span><span title="88 silver badges"><span class="badge2"></span><span class="badgecount">88</span></span><span title="91 bronze badges"><span class="badge3"></span><span class="badgecount">91</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+            
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-5342503" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-13477519" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="supernova">50</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">It's not clear from this message what the correct syntax is. It is: ALTER SEQUENCE product_id_seq RESTART WITH 1453;</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/62/liron-yahdav" title="2548 reputation" class="comment-user">Liron Yahdav</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres#comment13477519_5342503"><span title="2012-05-03 22:19:19Z" class="relativetime-clean">May 3 '12 at 22:19</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-48850450" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Just because I parsed the above poorly, here's my way of restating the exact same thing. The syntax is <code>ALTER SEQUENCE yourTableName_yourColumnName_seq RESTART WITH #</code>, where "seq" is the literal text, and you put in a number for #. Do not neglect the underscores.  :-)</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/309502/kmort" title="1400 reputation" class="comment-user">kmort</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres#comment48850450_5342503"><span title="2015-05-21 17:32:29Z" class="relativetime-clean">May 21 '15 at 17:32</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-5342503" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+<script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22,8277,"adzerk373027157",4).setZone(44); });
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk373027157"><a href="http://engine.adzerk.net/r?e=eyJhdiI6NDE0LCJhdCI6NCwiYnQiOjAsImNtIjozMjI1MTQsImNoIjoxMTc4LCJjayI6e30sImNyIjoxMjY3ODQ2LCJkaSI6IjJmYzZlZGU1ZmJiOTRhZDRiMjhkZWI3Nzc4MDFjMjI3IiwiZG0iOjEsImZjIjoxMzY2MzQ3LCJmbCI6ODY0MjI2LCJpcCI6Ijk2LjQ5LjE3OC4xMzciLCJrdyI6InNxbCxwb3N0Z3Jlc3FsLHJlc2V0LGF1dG8taW5jcmVtZW50IiwibnciOjIyLCJwYyI6MCwiZWMiOjAsInByIjoxNTY4LCJydCI6MSwicmYiOiJodHRwczovL3d3dy5nb29nbGUuY2EvIiwic3QiOjgyNzcsInVrIjoidWUxLTM0ZTRiMjNiMmM0ODRhOTI4ZTBkZTZmMjBiYzBiNmE0Iiwiem4iOjQ0LCJ0cyI6MTQ1NTIwMDQ5ODAxNCwiYmYiOnRydWUsInBuIjoiYWR6ZXJrMzczMDI3MTU3IiwidXIiOiJodHRwOi8vc3RhY2tvdmVyZmxvdy5jb20vam9icy93aHktam9icz91dG1fc291cmNlPXN0YWNrb3ZlcmZsb3cuY29tJnV0bV9tZWRpdW09YWQmdXRtX2NhbXBhaWduPWNhbmRpZGF0ZXMtYWRkLWN2JnV0bV9jb250ZW50PWxiLWNhcmVlcnMtYml0YnVja2V0In0&amp;s=WkYqUnrJrZupYqSMQqNpcExLvrA" rel="nofollow" target="_blank" title=""><img src="./sql - Reset auto increment counter in postgres - Stack Overflow_files/" title="" alt="" border="0" width="728" height="90" style="display: none !important;"></a><img height="0px" width="0px" border="0" style="position: absolute; display: none !important;" src="./sql - Reset auto increment counter in postgres - Stack Overflow_files/"></div>
+  
+<a name="14759806"></a>
+<div id="answer-14759806" class="answer" data-answerid="14759806" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="14759806">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">88</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>Here is the command that you are looking for, assuming your sequence for the product table is product_id_seq:</p>
+
+<blockquote>
+  <p>ALTER SEQUENCE product_id_seq RESTART WITH 1453;</p>
+</blockquote>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/14759806" title="short permalink to this answer" class="short-link" id="link-post-14759806">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/14759806/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2013-02-07 19:53:21Z" class="relativetime">Feb 7 '13 at 19:53</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/448016/matt-snider"><div class="gravatar-wrapper-32"><img src="./sql - Reset auto increment counter in postgres - Stack Overflow_files/ea69517363a0aabf9bf09ed7ce1c5ea3" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/448016/matt-snider">matt snider</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">1,905</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="10 silver badges"><span class="badge2"></span><span class="badgecount">10</span></span><span title="25 bronze badges"><span class="badge3"></span><span class="badgecount">25</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+            
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-14759806" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-29869971" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Thanks for this</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/624624/qbdsolutions" title="1202 reputation" class="comment-user">QBDSolutions</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres#comment29869971_14759806"><span title="2013-11-18 17:48:58Z" class="relativetime-clean">Nov 18 '13 at 17:48</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-14759806" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="5343914"></a>
+<div id="answer-5343914" class="answer" data-answerid="5343914" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="5343914">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">39</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>To set the sequence counter:</p>
+
+<pre class="lang-sql prettyprint prettyprinted"><code><span class="pln">setval</span><span class="pun">(</span><span class="str">'product_id_seq'</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1453</span><span class="pun">);</span></code></pre>
+
+<p>If you don't know the sequence name use the <code>pg_get_serial_sequence</code> function:</p>
+
+<pre class="lang-sql prettyprint prettyprinted"><code><span class="kwd">select</span><span class="pln"> pg_get_serial_sequence</span><span class="pun">(</span><span class="str">'product'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'id'</span><span class="pun">);</span><span class="pln">
+ pg_get_serial_sequence 
+</span><span class="com">------------------------</span><span class="pln">
+ </span><span class="kwd">public</span><span class="pun">.</span><span class="pln">product_id_seq</span></code></pre>
+
+<p>The parameters are the table name and the column name.</p>
+
+<p>Or just issue a <code>\d product</code> at the <code>psql</code> prompt:</p>
+
+<pre class="lang-sql prettyprint prettyprinted"><code><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">\</span><span class="pln">d product
+                         </span><span class="kwd">Table</span><span class="pln"> </span><span class="str">"public.product"</span><span class="pln">
+ </span><span class="kwd">Column</span><span class="pln"> </span><span class="pun">|</span><span class="pln">  Type   </span><span class="pun">|</span><span class="pln">                      Modifiers                       
+</span><span class="com">--------+---------+------------------------------------------------------</span><span class="pln">
+ id     </span><span class="pun">|</span><span class="pln"> integer </span><span class="pun">|</span><span class="pln"> </span><span class="kwd">not</span><span class="pln"> </span><span class="kwd">null</span><span class="pln"> </span><span class="kwd">default</span><span class="pln"> nextval</span><span class="pun">(</span><span class="str">'product_id_seq'</span><span class="pun">::</span><span class="pln">regclass</span><span class="pun">)</span><span class="pln">
+ name   </span><span class="pun">|</span><span class="pln"> text    </span><span class="pun">|</span><span class="pln"> </span></code></pre>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/5343914" title="short permalink to this answer" class="short-link" id="link-post-5343914">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/5343914/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/5343914/revisions" title="show all edits to this post">edited <span title="2012-12-26 10:35:20Z" class="relativetime">Dec 26 '12 at 10:35</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        
+        <div class="-flair">
+            
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2011-03-17 19:01:58Z" class="relativetime">Mar 17 '11 at 19:01</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/131874/clodoaldo-neto"><div class="gravatar-wrapper-32"><img src="./sql - Reset auto increment counter in postgres - Stack Overflow_files/b3600796ab1d9e78c7545c91468c2e51" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/131874/clodoaldo-neto">Clodoaldo Neto</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score 39602" dir="ltr">39.6k</span><span title="7 gold badges"><span class="badge1"></span><span class="badgecount">7</span></span><span title="52 silver badges"><span class="badge2"></span><span class="badgecount">52</span></span><span title="95 bronze badges"><span class="badge3"></span><span class="badgecount">95</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+            
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-5343914" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-5343914" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="18060545"></a>
+<div id="answer-18060545" class="answer" data-answerid="18060545" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="18060545">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">36</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>The following command does this automatically for you: <strong>This will also delete all the data in the table. So be careful.</strong> </p>
+
+<pre class="lang-sql prettyprint prettyprinted"><code><span class="kwd">TRUNCATE</span><span class="pln"> </span><span class="kwd">TABLE</span><span class="pln"> someTable RESTART </span><span class="kwd">IDENTITY</span><span class="pun">;</span></code></pre>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/18060545" title="short permalink to this answer" class="short-link" id="link-post-18060545">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/18060545/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/18060545/revisions" title="show all edits to this post">edited <span title="2014-08-12 14:40:40Z" class="relativetime">Aug 12 '14 at 14:40</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        
+        <div class="-flair">
+            
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2013-08-05 14:19:59Z" class="relativetime">Aug 5 '13 at 14:19</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/163799/loolooii"><div class="gravatar-wrapper-32"><img src="./sql - Reset auto increment counter in postgres - Stack Overflow_files/3946e4b95db2f8b2da6d5bfcd2bf00e4" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/163799/loolooii">Loolooii</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">1,991</span><span title="9 gold badges"><span class="badge1"></span><span class="badgecount">9</span></span><span title="36 silver badges"><span class="badge2"></span><span class="badgecount">36</span></span><span title="60 bronze badges"><span class="badge3"></span><span class="badgecount">60</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+            
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-18060545" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-27837323" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">1</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">work perfect and does the job.  Thanks</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/1144372/stonep" title="154 reputation" class="comment-user">stonep</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres#comment27837323_18060545"><span title="2013-09-18 05:18:16Z" class="relativetime-clean">Sep 18 '13 at 5:18</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-28435621" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="warm">9</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Beware - this will delete all of your data as well</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/81804/kibibu" title="2741 reputation" class="comment-user">kibibu</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres#comment28435621_18060545"><span title="2013-10-06 22:20:04Z" class="relativetime-clean">Oct 6 '13 at 22:20</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-28481484" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">2</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">@kibibu of course it will, it's TRUNCATE :)</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/163799/loolooii" title="1991 reputation" class="comment-user">Loolooii</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres#comment28481484_18060545"><span title="2013-10-08 07:35:56Z" class="relativetime-clean">Oct 8 '13 at 7:35</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-28517243" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="hot">15</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">@Loolooii, Just flagging it; if somebody unfamiliar to SQL is searching here because they manually added a row to a table with an autoincrement field (through an ORM, for example), then this solution is probably not what they expect.</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/81804/kibibu" title="2741 reputation" class="comment-user">kibibu</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres#comment28517243_18060545"><span title="2013-10-09 03:15:43Z" class="relativetime-clean">Oct 9 '13 at 3:15</span></a></span>
+                    <span class="edited-yes" title="this comment was edited 1 time"></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-52924313" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">What about indexes?</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/445144/scaryguy" title="3188 reputation" class="comment-user">scaryguy</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres#comment52924313_18060545"><span title="2015-09-11 22:35:03Z" class="relativetime-clean">Sep 11 '15 at 22:35</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-18060545" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="33630933"></a>
+<div id="answer-33630933" class="answer" data-answerid="33630933" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="33630933">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">2</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p><strong><em>Converted from comment for the sake of visitor's convenience</em></strong></p>
+
+<p>It's not clear from this message what the correct syntax is. It is: </p>
+
+<pre class="lang-sql prettyprint prettyprinted"><code><span class="kwd">ALTER</span><span class="pln"> SEQUENCE product_id_seq RESTART </span><span class="kwd">WITH</span><span class="pln"> </span><span class="lit">1453</span><span class="pun">;</span></code></pre>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/33630933" title="short permalink to this answer" class="short-link" id="link-post-33630933">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/33630933/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        answered <a href="http://stackoverflow.com/posts/33630933/revisions" title="show all edits to this post"><span title="2015-11-10 13:17:23Z" class="relativetime">Nov 10 '15 at 13:17</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        
+        <div class="-flair">
+            
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info">
+    <div class="user-details">
+        <span class="community-wiki" title="This post is community owned as of Nov 10 &#39;15 at 13:17. Votes do not generate reputation, and it can be edited by users with 100 rep">
+            community wiki
+        </span>
+    </div><br>
+    <div class="user-details">
+        <a id="history-33630933" href="http://stackoverflow.com/posts/33630933/revisions" title="show revision history for this post">
+        Anwar
+        </a>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+            
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-33630933" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-33630933" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+									<a name="new-answer"></a>
+						<form id="post-form" action="http://stackoverflow.com/questions/5342440/answer/submit" method="post" class="post-form">
+						    <input type="hidden" id="post-id" value="5342440">
+                            <input type="hidden" id="qualityBanWarningShown" name="qualityBanWarningShown" value="false">
+                            <input type="hidden" name="referrer" value="https://www.google.ca/">
+							<h2 class="space">Your Answer</h2>
+
+
+            <script>
+            StackExchange.ifUsing("editor", function () {
+                StackExchange.using("externalEditor", function () {
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.init();
+                    });
+                });
+            }, "code-snippets");
+        </script>
+    
+
+<script>
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+       
+        StackExchange.using("externalEditor", function() {
+                // Have to fire editor after snippets, if snippets enabled
+                if (StackExchange.options.snippets.enabled) {
+                    StackExchange.using("snippets", function() {
+                        createEditor();
+                    });
+                }
+                else {
+                    createEditor();
+                }
+            });
+
+            function createEditor() {
+                prepareEditor({
+                    heartbeatType: 'answer',
+                convertImagesToLinks: true,
+                reputationToPostImages: 10,
+                bindNavPrevention: true,
+                postfix: "",
+                    onDemand: true,
+                    discardSelector: ".discard-answer"
+                    ,immediatelyShowMarkdownHelp:true
+                    });
+                
+
+        }
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor js-post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"><ul id="wmd-button-row" class="wmd-button-row"><li id="wmd-bold-button" class="wmd-button" style="left: 0px;"><span style="background-position: 0px -20px;"></span></li><li id="wmd-italic-button" class="wmd-button" style="left: 25px;"><span style="background-position: -20px -20px;"></span></li><li id="wmd-spacer1" class="wmd-spacer" style="left: 50px;"><span style="background-position: -40px -20px;"></span></li><li id="wmd-link-button" class="wmd-button" style="left: 75px;"><span style="background-position: -40px -20px;"></span></li><li id="wmd-quote-button" class="wmd-button" style="left: 100px;"><span style="background-position: -60px -20px;"></span></li><li id="wmd-code-button" class="wmd-button" style="left: 125px;"><span style="background-position: -80px -20px;"></span></li><li id="wmd-image-button" class="wmd-button" style="left: 150px;"><span style="background-position: -100px -20px;"></span></li><li id="wmd-spacer2" class="wmd-spacer" style="left: 175px;"><span style="background-position: -120px -20px;"></span></li><li id="wmd-olist-button" class="wmd-button" style="left: 200px;"><span style="background-position: -120px -20px;"></span></li><li id="wmd-ulist-button" class="wmd-button" style="left: 225px;"><span style="background-position: -140px -20px;"></span></li><li id="wmd-heading-button" class="wmd-button" style="left: 250px;"><span style="background-position: -160px -20px;"></span></li><li id="wmd-hr-button" class="wmd-button" style="left: 275px;"><span style="background-position: -180px -20px;"></span></li><li id="wmd-spacer3" class="wmd-spacer" style="left: 300px;"><span style="background-position: -200px -20px;"></span></li><li id="wmd-undo-button" class="wmd-button" style="left: 325px;"><span style="background-position: -200px -20px;"></span></li><li id="wmd-redo-button" class="wmd-button" style="left: 350px;"><span style="background-position: -220px -20px;"></span></li></ul></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length="" data-gramm="" data-txt_gramm_id="b69e49c7-e15b-9434-0f85-2050210e6283"></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="3121ae8fc7401d1ce02898f1653a9801">
+        <input id="author" name="author" type="text">
+    </div>
+
+
+
+</div>
+							<div style="position: relative;">
+								
+								            <div class="form-item new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="http://stackoverflow.com/users/login?ssrc=question_page&amp;returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f5342440%2freset-auto-increment-counter-in-postgres%23new-answer">log in</a></h3>
+                        <script>
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Email and Password</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid">
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false">
+                    <input type="hidden" name="use-google" class="use-google" value="false">
+                    <input type="button" class="submit-openid" value="Submit" style="display:none">
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tbody><tr>
+                    <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="email" size="30" maxlength="100" value="" tabindex="106" placeholder="required, but never shown">
+                </div>
+            </td>
+        </tr>
+        </tbody></table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script>
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', 'http%3a%2f%2fstackoverflow.com%2fquestions%2f5342440%2freset-auto-increment-counter-in-postgres%23new-answer', 'question_page');
+                    }
+                );
+            </script>
+            <noscript>
+                        &lt;h3&gt;Post as a guest&lt;/h3&gt;
+    &lt;div class="form-item"&gt;
+        &lt;table&gt;
+        &lt;tr&gt;
+                    &lt;td class="vm"&gt;
+                &lt;div&gt;
+                    &lt;label for="display-name"&gt;Name&lt;/label&gt;
+                    &lt;input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105"&gt;
+                &lt;/div&gt;
+                &lt;div&gt;
+                    &lt;label for="m-address"&gt;Email&lt;/label&gt;
+                    &lt;input id="m-address" name="m-address" type="email" size="30" maxlength="100" value="" tabindex="106" placeholder="required, but never shown" /&gt;
+                &lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/div&gt;
+
+            </noscript>
+
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href="http://stackexchange.com/legal/privacy-policy" target="_blank">privacy policy</a> and <a href="http://stackexchange.com/legal/terms-of-service" target="_blank">terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1">								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice" data-loc="1">
+Not the answer you're looking for?							Browse other questions tagged <a href="http://stackoverflow.com/questions/tagged/sql" class="post-tag" title="show questions tagged &#39;sql&#39;" rel="tag">sql</a> <a href="http://stackoverflow.com/questions/tagged/postgresql" class="post-tag" title="show questions tagged &#39;postgresql&#39;" rel="tag">postgresql</a> <a href="http://stackoverflow.com/questions/tagged/reset" class="post-tag" title="show questions tagged &#39;reset&#39;" rel="tag">reset</a> <a href="http://stackoverflow.com/questions/tagged/auto-increment" class="post-tag" title="show questions tagged &#39;auto-increment&#39;" rel="tag">auto-increment</a>  or <a href="http://stackoverflow.com/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+						    <div class="module question-stats">
+			        <table id="qinfo">
+			            <tbody><tr>
+			                <td>
+			                    <p class="label-key">asked</p>
+			                </td>
+			                <td style="padding-left: 10px">
+			                    <p class="label-key" title="2011-03-17 16:55:03Z"><b>4 years ago</b></p>
+			                </td>
+			            </tr>
+			            <tr>
+			                <td>
+			                    <p class="label-key">viewed</p>
+			                </td>
+
+			                <td style="padding-left: 10px">
+			                    <p class="label-key">
+			                        <b>37072 times</b>
+			                    </p>
+			                </td>
+			            </tr>
+			                <tr>
+			                    <td>
+			                        <p class="label-key">active</p>
+			                    </td>
+			                    <td style="padding-left: 10px">
+			                        <p class="label-key"><b><a href="http://stackoverflow.com/questions/5342440/reset-auto-increment-counter-in-postgres?lastactivity" class="lastactivity-link" title="2015-11-10 13:17:23Z">3 months ago</a></b></p>
+			                    </td>
+			                </tr>
+			        </tbody></table>
+			    </div>
+			<div class="module community-bulletin" data-tracker="cb=1">
+    <div class="related">
+                <div class="bulletin-title">
+                    Blog
+                </div>
+                <hr>
+    <div class="spacer">
+        <div class="bulletin-item-type">
+                <a href="http://blog.stackoverflow.com/2016/02/why-stack-overflow-doesnt-care-about-ad-blockers/?cb=1" class="question-hyperlink">
+<div class="favicon favicon-stackexchangemeta" title="Meta Stack Exchange"></div>                </a>
+            </div>
+                <div class="bulletin-item-content">
+                    <a href="http://blog.stackoverflow.com/2016/02/why-stack-overflow-doesnt-care-about-ad-blockers/?cb=1" class="question-hyperlink">Why Stack Overflow Doesn’t Care About Ad Blockers</a>
+                </div>
+                <br class="cbt">
+            </div>
+    </div>
+</div>			
+			<script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22,8277,"adzerk365344186",[5,17,2221]).setZone(45); });
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk365344186"><div id="careersadsdoublehigh" style="display:none;"></div><img height="0px" width="0px" border="0" style="position: absolute; display: none !important;" src="./sql - Reset auto increment counter in postgres - Stack Overflow_files/"></div>
+        <div id="hireme" class=" tagthemedrails tag-themed rails tagged"><a href="http://stackoverflow.com/jobs/tag/ruby-on-rails" target="_blank" data-tz="1" data-ti="12" class="top"><span>Want a <span class="header-tag">rails</span> job?</span></a><div class="middle"><ul class="jobs"><li><a data-at="0" data-tz="3" data-ti="191841" href="http://stackoverflow.com/jobs/105914/software-developer-ruby-on-rails-chimpnet" target="_blank" title="Software Developer, Ruby on Rails at Chimp.net. Click to learn more.">Software Developer, Ruby on Rails<br><div class="company">Chimp.net</div><div class="location" title="Vancouver, BC, Canada">Vancouver, BC, Canada</div><span class="post-tag highlight">ruby-on-rails</span></a></li><li><a data-at="0" data-tz="3" data-ti="185118" href="http://stackoverflow.com/jobs/99157/senior-ruby-on-rails-software-developer-qhr-technologies" target="_blank" title="Senior Ruby-on-Rails Software Developer at QHR Technologies. Click to learn more.">Senior Ruby-on-Rails Software Developer<br><div class="company">QHR Technologies</div><div class="location" title="Vancouver, BC, Canada">Vancouver, BC, Canada</div><span class="post-tag highlight">ruby-on-rails</span><span class="post-tag">postgresql</span></a></li><li><a data-at="0" data-tz="3" data-ti="168718" href="http://stackoverflow.com/jobs/82418/full-stack-ruby-on-rails-developer-wishpond" target="_blank" title="Full Stack Ruby on Rails Developer at Wishpond. Click to learn more.">Full Stack Ruby on Rails Developer<br><div class="company">Wishpond</div><div class="location" title="Vancouver, BC, Canada">Vancouver, BC, Canada</div><span class="post-tag highlight">ruby-on-rails</span><span class="post-tag">html</span></a></li><li><a data-at="0" data-tz="3" data-ti="189411" href="http://stackoverflow.com/jobs/103476/lead-developer-vin65" target="_blank" title="Lead Developer at Vin65. Click to learn more.">Lead Developer<br><div class="company">Vin65</div><div class="location" title="Vancouver, BC, Canada / relocation">Vancouver, BC, Canada / relocation</div><span class="post-tag highlight">ruby-on-rails</span><span class="post-tag">node.js</span></a></li></ul></div><img class="impression" src="./sql - Reset auto increment counter in postgres - Stack Overflow_files/i.gif" style="display:none;"></div>
+			  
+    
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/17490095?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">1</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/17490095/how-can-i-set-a-auto-increment-value-to-default-value-which-i-like?lq=1" class="question-hyperlink">How can i set a auto increment value to default value which i like</a>
+</div><div class="spacer">
+	<a href="http://stackoverflow.com/q/24416533?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">1</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/24416533/postgres-truncate-restart-identity-doesnt-restart-identity?lq=1" class="question-hyperlink">Postgres truncate restart identity doesn't restart identity</a>
+</div>			</div>
+</div>
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+                    <div class="related js-gps-related-questions" data-tracker="rq=1">
+                        <div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/2214141?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">38
+    </div>
+</a><a href="http://stackoverflow.com/questions/2214141/auto-increment-after-delete-in-mysql?rq=1" class="question-hyperlink">Auto Increment after delete in MySQL</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/2822713?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="http://stackoverflow.com/questions/2822713/reset-auto-increment-column-value-in-script-mysql?rq=1" class="question-hyperlink">Reset auto increment column value in script mysql</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/7718585?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted large">110
+    </div>
+</a><a href="http://stackoverflow.com/questions/7718585/how-to-set-auto-increment-primary-key-in-postgresql?rq=1" class="question-hyperlink">How to set auto increment primary key in PostgreSQL?</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/8923114?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted large">471
+    </div>
+</a><a href="http://stackoverflow.com/questions/8923114/how-to-reset-auto-increment-in-mysql?rq=1" class="question-hyperlink">How to reset AUTO_INCREMENT in MySQL?</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/9108833?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">18
+    </div>
+</a><a href="http://stackoverflow.com/questions/9108833/postgres-autoincrement-not-updated-on-explicit-id-inserts?rq=1" class="question-hyperlink">postgres autoincrement not updated on explicit id inserts</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/12423218?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="http://stackoverflow.com/questions/12423218/postgresql-wrong-auto-increment-for-serial?rq=1" class="question-hyperlink">Postgresql wrong auto-increment for serial</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/18228994?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="http://stackoverflow.com/questions/18228994/how-to-auto-increment-a-value-in-one-table-when-inserted-a-row-in-another-table?rq=1" class="question-hyperlink">How to auto increment a value in one table when inserted a row in another table</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/23936316?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="http://stackoverflow.com/questions/23936316/reassign-reset-all-auto-increment-values-in-a-table?rq=1" class="question-hyperlink">Reassign/Reset all auto increment values in a table</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/24149065?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="http://stackoverflow.com/questions/24149065/auto-increment-issues-postgresql?rq=1" class="question-hyperlink">Auto increment issues postgresql</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/27762311?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="http://stackoverflow.com/questions/27762311/mysql-auto-increment-with-prefix-yymm-that-reset-every-month?rq=1" class="question-hyperlink">MySQL AUTO INCREMENT with Prefix (YYMM) that reset every month</a>
+</div>
+
+                    </div>
+				</div>
+            
+<div id="hot-network-questions" class="module">
+    <h4>
+        <a href="http://stackexchange.com/questions?tab=hot" class="js-gps-track" data-gps-track="posts_hot_network.click({ item_type:1, location:11 })">
+            Hot Network Questions
+        </a>
+    </h4>
+    <ul>
+            <li>
+                <div class="favicon favicon-worldbuilding" title="Worldbuilding Stack Exchange"></div><a href="http://worldbuilding.stackexchange.com/questions/35499/what-does-the-minotaur-eat" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:579 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What does the Minotaur eat?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-money" title="Personal Finance &amp; Money Stack Exchange"></div><a href="http://money.stackexchange.com/questions/59185/using-a-roth-ira-instead-of-a-college-savings-account" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:93 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Using a Roth IRA instead of a college savings account
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-unix" title="Unix &amp; Linux Stack Exchange"></div><a href="http://unix.stackexchange.com/questions/261470/get-rid-of-abandoned-ssh-processes" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:106 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Get rid of abandoned SSH processes
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-aviation" title="Aviation Stack Exchange"></div><a href="http://aviation.stackexchange.com/questions/25096/what-is-the-purpose-of-eyebrow-windows" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:528 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What is the purpose of eyebrow windows?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-mechanics" title="Motor Vehicle Maintenance &amp; Repair Stack Exchange"></div><a href="http://mechanics.stackexchange.com/questions/25891/why-do-pickups-and-large-suvs-use-4x4-and-generally-not-awd" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:224 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why do pickups and large SUV's use 4x4 and generally not AWD?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-graphicdesign" title="Graphic Design Stack Exchange"></div><a href="http://graphicdesign.stackexchange.com/questions/66809/what-s-the-right-character-for-an-apostrophe" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:174 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What’s the right character for an apostrophe?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="http://math.stackexchange.com/questions/1648266/what-is-the-flaw-of-this-proof-largest-integer" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What is the flaw of this proof (largest integer)?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-english" title="English Language &amp; Usage Stack Exchange"></div><a href="http://english.stackexchange.com/questions/305757/idiom-request-for-wasting-time-or-money" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:97 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Idiom request for wasting time or money
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-diy" title="Home Improvement Stack Exchange"></div><a href="http://diy.stackexchange.com/questions/84132/how-to-attach-two-pieces-of-carpets-in-a-reliable-way" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:73 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to attach two pieces of carpets in a reliable way?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-stackoverflow" title="Stack Overflow"></div><a href="http://stackoverflow.com/questions/35328471/why-c-sharp-compiler-use-an-invalid-methods-overload" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:1 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why C# compiler use an invalid method's overload?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-tridion" title="Tridion Stack Exchange"></div><a href="http://tridion.stackexchange.com/questions/13921/special-characters-not-rendering-properly-on-live-website" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:485 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Special Characters not rendering properly on live website
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-serverfault" title="Server Fault"></div><a href="http://serverfault.com/questions/755373/is-sharing-a-user-a-bad-habit" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:2 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is sharing a user a bad habit?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-travel" title="Travel Stack Exchange"></div><a href="http://travel.stackexchange.com/questions/62520/prohibited-item-forgotten-in-hand-luggage-what-to-do-with-it" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:273 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Prohibited item forgotten in hand luggage: what to do with it?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-gaming" title="Arqade"></div><a href="http://gaming.stackexchange.com/questions/254767/is-it-possible-to-scale-an-emulators-video-to-see-more-of-the-level" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:41 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is it possible to scale an emulator's video to see more of the level?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-gis" title="Geographic Information Systems Stack Exchange"></div><a href="http://gis.stackexchange.com/questions/180355/update-column-in-shp-from-tab-with-qgis" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:79 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Update column in .shp from .tab with QGIS
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-physics" title="Physics Stack Exchange"></div><a href="http://physics.stackexchange.com/questions/235220/how-to-understand-that-higgs-not-implies-a-circular-reasoning" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:151 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to understand that Higgs not implies a circular reasoning?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-security" title="Information Security Stack Exchange"></div><a href="http://security.stackexchange.com/questions/113335/are-ssl-browser-sessions-kept-alive-across-requests" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:162 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Are SSL browser sessions kept alive across requests?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-english" title="English Language &amp; Usage Stack Exchange"></div><a href="http://english.stackexchange.com/questions/305554/single-word-for-someone-whos-in-on-a-secret" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:97 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Single word for "Someone who's in on a secret"
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-graphicdesign" title="Graphic Design Stack Exchange"></div><a href="http://graphicdesign.stackexchange.com/questions/66699/first-clients-partner-demands-free-website-redesign-wants-deposit-returned-m" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:174 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    First client's partner demands free website redesign, wants deposit returned - moral dilemma
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-stackoverflow" title="Stack Overflow"></div><a href="http://stackoverflow.com/questions/35333984/is-reusing-memory-location-safe" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:1 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is reusing memory location safe?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-skeptics" title="Skeptics Stack Exchange"></div><a href="http://skeptics.stackexchange.com/questions/31791/do-researchers-receive-no-income-from-revenues-arising-from-their-published-pape" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:212 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Do researchers receive no income from revenues arising from their published papers?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-space" title="Space Exploration Stack Exchange"></div><a href="http://space.stackexchange.com/questions/14041/multiple-aerobraking" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:508 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Multiple aerobraking
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-scifi" title="Science Fiction &amp; Fantasy Stack Exchange"></div><a href="http://scifi.stackexchange.com/questions/117792/in-universe-is-aslan-actually-jesus" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:186 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    In-universe, is Aslan actually Jesus?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-aviation" title="Aviation Stack Exchange"></div><a href="http://aviation.stackexchange.com/questions/25117/what-are-the-rvsm-critical-area-markings" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:528 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What are the RVSM Critical Area markings?
+                </a>
+
+            </li>
+    </ul>
+
+        
+</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text">
+        <a href="http://stackoverflow.com/feeds/question/5342440" title="feed of this question and its answers">
+            <span class="feed-icon"></span>question feed
+        </a>
+    </div>
+</div>	<script>
+StackExchange.ready(function(){$.get('/posts/5342440/ivc/dcbd');});
+</script>
+<noscript>
+    &lt;div&gt;&lt;img src="/posts/5342440/ivc/dcbd" class="dno" alt="" width="0" height="0"&gt;&lt;/div&gt;
+</noscript><div style="display:none" id="prettify-lang">lang-sql</div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                    <a href="http://stackoverflow.com/company/about">about us</a>
+                        <a href="http://stackoverflow.com/tour">tour</a>
+                    <a href="http://stackoverflow.com/help">help</a>
+                    <a href="http://blog.stackoverflow.com/?blb=1">blog</a>
+                        <a href="http://chat.stackoverflow.com/">chat</a>
+                    <a href="http://data.stackexchange.com/">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackoverflow.com/company/work-here">work here</a>
+                    <a href="http://stackexchange.com/mediakit">advertising info</a>
+
+                    <a onclick="StackExchange.switchMobile(&quot;on&quot;)">mobile</a>
+                    <b><a href="http://stackoverflow.com/contact">contact us</a></b>
+                        <b><a href="http://meta.stackoverflow.com/">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tbody><tr>
+            <th colspan="3">
+                Technology
+            </th>
+            <th>
+                Life / Arts
+            </th>
+            <th>
+                Culture / Recreation
+            </th>
+            <th>
+                Science
+            </th>
+            <th>
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com/" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com/" title="system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com/" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com/" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com/" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com/" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com/" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com/" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com/" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com/" title="users of Linux, FreeBSD and other Un*x-like operating systems">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com/" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com/" title="WordPress developers and administrators">WordPress Development</a></li>
+                        <li><a href="http://gis.stackexchange.com/" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com/" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com/" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com/" title="information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com/" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com/" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com/" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com/" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com/" title="users of Mathematica">Mathematica</a></li>
+                        <li><a href="http://salesforce.stackexchange.com/" title="Salesforce administrators, implementation experts, developers and anybody in-between">Salesforce</a></li>
+                        <li><a href="http://expressionengine.stackexchange.com/" title="administrators, end users, developers and designers for ExpressionEngine® CMS">ExpressionEngine® Answers</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com/" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com/" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://graphicdesign.stackexchange.com/" title="Graphic Design professionals, students, and enthusiasts">Graphic Design</a></li>
+                        <li><a href="http://movies.stackexchange.com/" title="movie and tv enthusiasts">Movies &amp; TV</a></li>
+                        <li><a href="http://cooking.stackexchange.com/" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com/" title="contractors and serious DIYers">Home Improvement</a></li>
+                        <li><a href="http://money.stackexchange.com/" title="people who want to be financially literate">Personal Finance &amp; Money</a></li>
+                        <li><a href="http://academia.stackexchange.com/" title="academics and those enrolled in higher education">Academia</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (9)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com/" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com/" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com/" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com/" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com/" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com/" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com/" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com/" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com/" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com/" title="people interested in statistics, machine learning, data analysis, data mining, and data visualization">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com/" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com/" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net/" title="professional mathematicians">MathOverflow</a></li>
+                        <li><a href="http://chemistry.stackexchange.com/" title="scientists, academics, teachers and students">Chemistry</a></li>
+                        <li><a href="http://biology.stackexchange.com/" title="biology researchers, academics, and students">Biology</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (5)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com/" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackexchange.com/" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Exchange</a></li>
+                        <li><a href="http://area51.stackexchange.com/" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com/">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</tbody></table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo © 2016 Stack Exchange Inc; user contributions licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc by-sa 3.0</a> 
+                with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="svnrev">
+                rev 2016.2.10.3243
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        &lt;div id="noscript-warning"&gt;Stack Overflow works best with JavaScript enabled&lt;img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"&gt;&lt;/div&gt;
+    </noscript>
+<script>var p = "http", d = "static"; if (document.location.protocol == "https:") { p += "s"; d = "engine"; } var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = p + "://" + d + ".adzerk.net/ados.js"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);</script>
+<script>
+    var ados = ados || {};
+    ados.run = ados.run || [];
+    ados.run.push(function () {
+        ados_setKeywords('sql,postgresql,reset,auto-increment');; ados_load();
+    });         
+</script>
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m);
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-5620270-1');
+                        ga('set', 'dimension2', '|sql|postgresql|reset|auto-increment|');         ga('send', 'pageview');
+        var _qevents = _qevents || [],
+            _comscore = _comscore || [];
+        (function () {
+            var ssl='https:'==document.location.protocol,
+                s=document.getElementsByTagName('script')[0],
+                qc=document.createElement('script');
+            qc.async=true;
+            qc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+            s.parentNode.insertBefore(qc, s);
+            var sc=document.createElement('script');
+            sc.async=true;
+            sc.src=(ssl?'https://sb':'http://b') + '.scorecardresearch.com/beacon.js';
+            s.parentNode.insertBefore(sc, s);
+        })();
+        _comscore.push({ c1: "2", c2: "17440561" });
+        _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>
+            
+    
+<iframe src="./sql - Reset auto increment counter in postgres - Stack Overflow_files/result.html" id="tipila-frame" style="display: none;"></iframe><script id="hiddenlpsubmitdiv" style="display: none;"></script><script>try{(function() { for(var lastpass_iter=0; lastpass_iter < document.forms.length; lastpass_iter++){ var lastpass_f = document.forms[lastpass_iter]; if(typeof(lastpass_f.lpsubmitorig2)=="undefined"){ lastpass_f.lpsubmitorig2 = lastpass_f.submit; if (typeof(lastpass_f.lpsubmitorig2)=='object'){ continue;}lastpass_f.submit = function(){ var form=this; var customEvent = document.createEvent("Event"); customEvent.initEvent("lpCustomEvent", true, true); var d = document.getElementById("hiddenlpsubmitdiv"); if (d) {for(var i = 0; i < document.forms.length; i++){ if(document.forms[i]==form){ if (typeof(d.innerText) != 'undefined') { d.innerText=i.toString(); } else { d.textContent=i.toString(); } } } d.dispatchEvent(customEvent); }form.lpsubmitorig2(); } } }})()}catch(e){}</script><script async="" src="./sql - Reset auto increment counter in postgres - Stack Overflow_files/p.js"></script></body><div><div class="gr_-editor" style="display:none;" data-grammarly-reactid=".0"><div class="gr_-editor_back" data-grammarly-reactid=".0.0"></div><iframe class="gr_-ifr gr-_dialog-content" data-grammarly-reactid=".0.1"></iframe></div></div><span class="gr__tooltip"><span class="gr__tooltip-content"></span><i class="gr__tooltip-logo"></i><span class="gr__triangle"></span></span><grammarly-card><div style="top:0;left:0;visibility:hidden;" class="gr-grammar-card gr-grammar-card_anonymous" data-grammarly-reactid=".1"><span style="margin-left:0;" class="gr-grammar-card_triangle" data-grammarly-reactid=".1.0"></span><div class="gr-grammar-card_footer" data-grammarly-reactid=".1.4"><div class="gr-grammar-card_link" data-action="editor" data-grammarly-reactid=".1.4.0">Correct with Grammarly</div><div class="gr-grammar-card_btn-close gr-grammar-card_ignore" data-action="ignore" data-grammarly-reactid=".1.4.2">Ignore</div></div></div></grammarly-card></html>
