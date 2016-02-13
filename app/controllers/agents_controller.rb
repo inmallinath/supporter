@@ -1,5 +1,6 @@
 class AgentsController < ApplicationController
   before_action :find_request, only: [:show, :edit, :update, :destroy]
+
   def index
     if params[:search]
       @results = Agent.search(params[:search]).order("created_at DESC")
@@ -9,20 +10,11 @@ class AgentsController < ApplicationController
     @agents = @results.page(params[:page]).per(7)
   end
 
-  # def search
-  #   if params[:search]
-  #     @agents = Agent.search(params[:search]).order("created_at DESC")
-  #   else
-  #     @agents = Agent.order("created_at DESC")
-  #   end
-  # end
-
   def new
     @agent = Agent.new
   end
 
   def create
-
     @agent = Agent.new agent_params
     if @agent.save
       flash[:notice] = "Request saved successfully"
@@ -42,14 +34,15 @@ class AgentsController < ApplicationController
 
   def update
     if @agent.update agent_params
-      redirect_to agent_path(@agent), notice: "Support Request has been updated"
+      if agent_params.has_key?(:request)
+        # byebug
+        redirect_to agents_path, notice: "Support Request has been updated"
+      else
+        redirect_to agent_path, notice: "Support Request has been updated"
+      end
     else
       render :edit
     end
-  end
-
-  def state
-    render nothing: true
   end
 
   def destroy

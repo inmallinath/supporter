@@ -26,10 +26,10 @@
   <td><%= agent.message.first(50) + "..." %></td>
   <td><%= link_to "Edit", edit_agent_path(agent)%>
     <%= link_to "Delete", agent_path(agent), method: :delete, data: {confirm: "Are you sure?" }%>
-    <%if agent.request%>
-      <%= link_to "Done", state_path(agent), method: :post%>
+    <%if agent.request?%>
+      <%= link_to "Done", agent_path(agent, agent: {request: false}), method: :patch%>
     <%else%>
-      <%= link_to "Not Done", state_path(agent), method: :post%>
+      <%= link_to "Not Done", agent_path(agent, agent: {request: true}), method: :patch%>
     <%end%>
   </td>
 </tr>

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   # CREATE and NEW
   get '/agents/new' => 'agents#new', as: :new_agent
   post '/agents' => 'agents#create', as: :agents
-  post '/agents/:id' => 'agents#state', as: :state
+  #post '/agents/:id' => 'agents#state', as: :state
   # LIST and SHOW
   get '/agents/:id' => 'agents#show', as: :agent
   get '/agents' => 'agents#index'
